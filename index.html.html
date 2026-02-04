@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vocabulary Practice – Social Media</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #111;
+  padding: 20px;
+  font-size: 18px;
+}
+
+h1, h2 {
+  margin-top: 40px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 17px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #eeeeee;
+  cursor: pointer;
+}
+
+button:hover { background: #e0e0e0; }
+
+.correct { background:#c8f7c5 !important; border-color:#2e7d32; }
+.wrong { background:#f7c5c5 !important; border-color:#c62828; }
+.disabled { pointer-events:none; opacity:0.75; }
+
+.feedback { font-weight:bold; margin-top:10px; }
+</style>
+</head>
+
+<body>
+
+<h1>Vocabulary Practice: Social Media</h1>
+
+<div class="card">
+<h2>Vocabulary Overview</h2>
+<p><strong>Task:</strong> Read the vocabulary list carefully. Think about which words are new to you and which ones you already know.</p>
+<ul>
+<li>privacy concerns – Datenschutzbedenken</li>
+<li>to be concerned about – sich Sorgen machen über</li>
+<li>less regulated platforms – weniger regulierte Plattformen</li>
+<li>to postpone – aufschieben</li>
+<li>media literacy – Medienkompetenz</li>
+<li>to use digital spaces responsibly – digitale Räume verantwortungsvoll nutzen</li>
+<li>to require – erfordern</li>
+<li>to circumvent / bypass rules – Regeln umgehen</li>
+<li>accountability – Verantwortlichkeit</li>
+<li>to be accountable – verantwortlich sein</li>
+<li>to encounter violent content – auf gewalttätige Inhalte stoßen</li>
+<li>to affect sleep quality – die Schlafqualität beeinflussen</li>
+<li>anxiety – Angst / Angstzustände</li>
+<li>to reduce stress – Stress reduzieren</li>
+<li>to protect mental health – die psychische Gesundheit schützen</li>
+<li>addictive behaviour – süchtiges Verhalten</li>
+<li>to be addicted to – süchtig sein nach</li>
+<li>to improve concentration – die Konzentration verbessern</li>
+<li>to force companies – Unternehmen zwingen</li>
+<li>to restrict freedom – Freiheit einschränken</li>
+<li>to feel excluded – sich ausgeschlossen fühlen</li>
+<li>to implement a ban / a law – ein Verbot / Gesetz umsetzen</li>
+<li>to doomscroll – negativ endlos scrollen</li>
+</ul>
+</div>
+
+<h2>Task 1: German → English</h2>
+<div id="task1"></div>
+
+<h2>Task 2: Word → Explanation</h2>
+<div id="task2"></div>
+
+<h2>Task 3: Choose the correct word</h2>
+<div id="task3"></div>
+
+<script>
+const task1 = document.getElementById("task1");
+const task2 = document.getElementById("task2");
+const task3 = document.getElementById("task3");
+
+function shuffle(a) {
+  return a.sort(() => Math.random() - 0.5);
+}
+
+function createTask(container, question, options, correct) {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = "<p><strong>" + question + "</strong></p>";
+
+  const feedback = document.createElement("div");
+  feedback.className = "feedback";
+
+  shuffle([...options]).forEach(option => {
+    const button = document.createElement("button");
+    button.textContent = option;
+
+    button.onclick = () => {
+      card.querySelectorAll("button").forEach(b => b.classList.add("disabled"));
+
+      if (option === correct) {
+        button.classList.add("correct");
+        feedback.textContent = "Correct ✔";
+      } else {
+        button.classList.add("wrong");
+        feedback.textContent = "Not correct ✖";
+        card.querySelectorAll("button").forEach(b => {
+          if (b.textContent === correct) b.classList.add("correct");
+        });
+      }
+    };
+
+    card.appendChild(button);
+  });
+
+  card.appendChild(feedback);
+  container.appendChild(card);
+}
+</script>
+
+<script>
+// ---------- TASK 1 ----------
+const task1Data = [
+["Datenschutzbedenken","privacy concerns",["privacy concerns","media literacy","addictive behaviour"]],
+["sich Sorgen machen über","to be concerned about",["be accountable","to restrict freedom","to be concerned about"]],
+["weniger regulierte Plattformen","less regulated platforms",["less regulated platforms","platforms for teenagers","addictive platforms"]],
+["aufschieben","to postpone",["to postpone","to restrict","to implement"]],
+["Medienkompetenz","media literacy",["online behaviour","media literacy","digital safety"]],
+["digitale Räume verantwortungsvoll nutzen","to use digital spaces responsibly",["to use digital spaces responsibly","to avoid the internet","to limit screen time"]],
+["erfordern","to require",["to require","to allow","to suggest"]],
+["Regeln umgehen","to circumvent / bypass rules",["to follow rules","to change laws","to circumvent / bypass rules"]],
+["Verantwortlichkeit","accountability",["online control","accountability","responsibility (general)"]],
+["verantwortlich sein","to be accountable",["to be accountable","to be blamed","to be informed"]],
+["auf gewalttätige Inhalte stoßen","to encounter violent content",["to search for violence","to encounter violent content","to report violent content"]],
+["die Schlafqualität beeinflussen","to affect sleep quality",["to affect sleep quality","to delay bedtime","to prevent sleep"]],
+["Angst / Angstzustände","anxiety",["stress","anxiety","fear"]],
+["Stress reduzieren","to reduce stress",["to ignore problems","to avoid school","to reduce stress"]],
+["die psychische Gesundheit schützen","to protect mental health",["to protect mental health","to improve mood","to reduce stress"]],
+["süchtiges Verhalten","addictive behaviour",["bad habits","addictive behaviour","overuse"]],
+["süchtig sein nach","to be addicted to",["to depend on people","to be addicted to","to like very much"]],
+["die Konzentration verbessern","to improve concentration",["to improve concentration","to learn faster","to focus longer online"]],
+["Unternehmen zwingen","to force companies",["to regulate markets","to force companies","to control companies"]],
+["Freiheit einschränken","to restrict freedom",["to remove rights","to protect safety","to restrict freedom"]],
+["sich ausgeschlossen fühlen","to feel excluded",["to feel excluded","to be alone","to be ignored"]],
+["ein Verbot / Gesetz umsetzen","to implement a ban / a law",["to implement a ban / a law","to discuss a law","to change a law"]],
+["negativ endlos scrollen","to doomscroll",["to read bad news","to doomscroll","to scroll endlessly"]]
+];
+
+shuffle(task1Data).forEach(t =>
+  createTask(task1, t[0], t[2], t[1])
+);
+
+// ---------- TASK 2 ----------
+const task2Data = [
+["privacy concerns",["the fear of being unpopular on social media","worries about how personal information is collected and used online","problems caused by spending too much time online"],"worries about how personal information is collected and used online"],
+["to be concerned about",["to be interested in a new topic","to be angry about a rule or decision","to worry about something that may cause problems"],"to worry about something that may cause problems"],
+["less regulated platforms",["platforms owned by governments","online platforms with fewer rules and weaker control","platforms that are very popular with teenagers"],"online platforms with fewer rules and weaker control"],
+["to postpone",["to improve something slowly","to delay something until a later time","to stop something forever"],"to delay something until a later time"],
+["media literacy",["the technical ability to repair computers","the amount of time spent online","the ability to understand, analyse, and use media critically"],"the ability to understand, analyse, and use media critically"],
+["to use digital spaces responsibly",["to spend as much time online as possible","to behave carefully and thoughtfully online","to avoid the internet completely"],"to behave carefully and thoughtfully online"],
+["to require",["to allow something without limits","to politely suggest something","to officially need something"],"to officially need something"],
+["to circumvent / bypass rules",["to change rules legally","to follow rules very carefully","to avoid rules in an illegal or dishonest way"],"to avoid rules in an illegal or dishonest way"],
+["accountability",["technical skills","responsibility for actions and their consequences","popularity on social media"],"responsibility for actions and their consequences"],
+["to be accountable",["to be blamed unfairly","to be well known to the public","to be responsible for what you do or allow"],"to be responsible for what you do or allow"],
+["to encounter violent content",["to report violent content online","to come across content that shows violence","to search actively for violent videos"],"to come across content that shows violence"],
+["to affect sleep quality",["to completely prevent sleep","to decide when someone goes to bed","to influence how well someone sleeps"],"to influence how well someone sleeps"],
+["anxiety",["physical tiredness after school","short moments of happiness","strong feelings of worry, fear, or nervousness"],"strong feelings of worry, fear, or nervousness"],
+["to reduce stress",["to increase pressure and expectations","to ignore problems completely","to make stress weaker or less intense"],"to make stress weaker or less intense"],
+["to protect mental health",["to avoid all difficult situations","to keep the mind healthy and stable","to improve physical strength"],"to keep the mind healthy and stable"],
+["addictive behaviour",["behaviour that happens only once","behaviour that is hard to control and repeated often","behaviour that is creative and productive"],"behaviour that is hard to control and repeated often"],
+["to be addicted to",["to dislike something strongly","to enjoy something occasionally","to depend strongly on something and find it hard to stop"],"to depend strongly on something and find it hard to stop"],
+["to improve concentration",["to reduce learning time","to get distracted more easily","to become better at focusing and paying attention"],"to become better at focusing and paying attention"],
+["to force companies",["to advise companies politely","to support companies financially","to make companies do something they do not want to do"],"to make companies do something they do not want to do"],
+["to restrict freedom",["to protect people from all risks","to give people more choices","to limit what people are allowed to do"],"to limit what people are allowed to do"],
+["to feel excluded",["to choose to be alone","to feel proud and confident","to feel left out and not part of a group"],"to feel left out and not part of a group"],
+["to implement a ban / a law",["to remove a law completely","to put a rule or law into practice","to discuss a law without action"],"to put a rule or law into practice"],
+["to doomscroll",["to stop using social media suddenly","to post negative comments online","to scroll through mostly negative news for a long time"],"to scroll through mostly negative news for a long time"]
+];
+
+shuffle(task2Data).forEach(t =>
+  createTask(task2, t[0], t[1], t[2])
+);
+
+// ---------- TASK 3 ----------
+const task3Data = [
+["Many parents have __________ about how social media companies use personal data.",["anxiety","privacy concerns","addictive behaviour"],"privacy concerns"],
+["Teachers are __________ the amount of time teenagers spend online.",["addicted to","concerned about","accountable"],"concerned about"],
+["After the ban, some teenagers may move to __________ where safety rules are weaker.",["media literacy","addictive platforms","less regulated platforms"],"less regulated platforms"],
+["A ban might __________ teenagers’ first contact with social media until they are older.",["implement","postpone","restrict"],"postpone"],
+["Schools try to teach __________ so students can understand online content critically.",["screen time","media literacy","privacy concerns"],"media literacy"],
+["Teenagers need guidance to __________ instead of using social media without limits.",["doomscroll","use digital spaces responsibly","reduce stress"],"use digital spaces responsibly"],
+["Strong age checks __________ new technical systems and clear rules.",["improve","bypass","require"],"require"],
+["Some users try to __________ by using fake age information.",["implement a ban","circumvent / bypass rules","reduce stress"],"circumvent / bypass rules"],
+["The law increases __________ for social media companies.",["influence","accountability","anxiety"],"accountability"],
+["Platforms should __________ for the content shown to young users.",["feel excluded","restrict freedom","be accountable"],"be accountable"],
+["Teenagers may __________ when moderation is weak.",["reduce stress","encounter violent content","improve concentration"],"encounter violent content"],
+["Using social media late at night can __________.",["reduce stress","affect sleep quality","improve concentration"],"affect sleep quality"],
+["Constant comparison online can increase __________ among teenagers.",["media literacy","anxiety","concentration"],"anxiety"],
+["Watching short videos helps some teenagers __________ after school.",["postpone problems","reduce stress","restrict freedom"],"reduce stress"],
+["Supporters argue that a ban helps __________.",["restrict freedom","protect mental health","doomscroll"],"protect mental health"],
+["Endless scrolling can lead to __________.",["media literacy","addictive behaviour","accountability"],"addictive behaviour"],
+["Some teenagers admit they are __________ social media.",["concerned about","addicted to","responsible for"],"addicted to"],
+["Less screen time may __________ at school.",["reduce stress","postpone learning","improve concentration"],"improve concentration"],
+["The government wants to __________ to change their algorithms.",["restrict freedom","force companies","postpone rules"],"force companies"],
+["Critics argue that a ban could __________ of young people.",["reduce stress","restrict freedom","improve concentration"],"restrict freedom"],
+["Teenagers without social media access may __________ from their peer group.",["be accountable","doomscroll","feel excluded"],"feel excluded"],
+["It is difficult to __________ effectively in everyday life.",["restrict freedom","implement a ban","reduce stress"],"implement a ban"],
+["Many teenagers __________ late at night by scrolling through bad news.",["reduce stress","be accountable","doomscroll"],"doomscroll"]
+];
+
+shuffle(task3Data).forEach(t =>
+  createTask(task3, t[0], t[1], t[2])
+);
+</script>
+
+</body>
+</html>
